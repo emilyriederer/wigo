@@ -1,0 +1,17 @@
+Package: wigo
+Title: knitr engine to explain what is going on
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Emily",
+           family = "Riederer",
+           role = c("aut", "cre"),
+           email = "emilyriederer@gmail.com")
+Description: This knitr engine that outputs table representing state of
+    knitr environment and key state changes. It is intended to help understand 
+    and debug an RMarkdown script.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    knitr
