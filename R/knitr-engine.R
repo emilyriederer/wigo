@@ -47,7 +47,7 @@ eng_wigo <- function(options) {
 
   # dedup from previous records ----
   prev_env <- tryCatch(get('knitr_wigo_eng_df', knitr::knit_global()), error = function(e) NULL)
-  comb_env <- rbind(prev_env, out)
+  comb_env <- rbind(prev_env, out, make.row.names = FALSE)
   whch_dup <- duplicated(comb_env[,c('name', 'type','class', 'dim')])
   combined <- comb_env[!whch_dup,]
 
