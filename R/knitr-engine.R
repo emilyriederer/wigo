@@ -50,10 +50,11 @@ eng_wigo <- function(options) {
   comb_env <- rbind(prev_env, out, make.row.names = FALSE)
   whch_dup <- duplicated(comb_env[,c('name', 'type','class', 'dim')])
   combined <- comb_env[!whch_dup,]
+  row.names(combined) <- NULL
 
   # preserve history and create output ----
   assign("knitr_wigo_eng_df", combined, envir = knitr::knit_global())
-  out_tbl <- knitr::kable(combined)
+  out_tbl <- knitr::kable(combined, row.names = FALSE)
 
   # return output ----
   knitr::engine_output(options, options$code, out_tbl)
