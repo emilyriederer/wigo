@@ -35,3 +35,12 @@ library(wigo)
 register_eng_wigo()
 knitr::opts_chunk$set(engine = 'wigo')
 ```
+
+By doing so, you can input such as:
+
+![](man/figures/readme-ex-input.png)
+
+to output like:
+
+![](man/figures/readme-ex-output.png)
+
