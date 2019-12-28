@@ -35,11 +35,13 @@ eng_wigo <- function(options) {
   obj_types <- vapply(obj_names, FUN = function(x) typeof(get(x)), character(1))
   obj_class <- vapply(obj_names, FUN = function(x) class(get(x)), character(1))
   obj_dimns <- vapply(obj_names, FUN = function(x) get_dimn(get(x)), character(1))
+  obj_rawsz <- vapply(obj_names, FUN = function(x) object.size(get(x)), numeric(1))
   obj_size  <- vapply(obj_names, FUN = function(x) get_size(get(x)), character(1))
   out <- data.frame(name    = obj_names,
                     type    = obj_types,
                     class   = obj_class,
                     dim     = obj_dimns,
+                    raw_sz  = obj_rawsz,
                     size    = obj_size,
                     created = rep(options$label, times = length(obj_names)),
                     stringsAsFactors = FALSE,
@@ -48,13 +50,13 @@ eng_wigo <- function(options) {
   # dedup from previous records ----
   prev_env <- tryCatch(get('knitr_wigo_eng_df', knitr::knit_global()), error = function(e) NULL)
   comb_env <- rbind(prev_env, out, make.row.names = FALSE)
-  whch_dup <- duplicated(comb_env[,c('name', 'type','class', 'dim', 'size')])
+  whch_dup <- duplicated(comb_env[,c('name', 'type','class', 'dim', 'raw_sz', 'size')])
   combined <- comb_env[!whch_dup,]
   row.names(combined) <- NULL
 
   # preserve history and create output ----
   assign("knitr_wigo_eng_df", combined, envir = knitr::knit_global())
-  out_tbl <- knitr::kable(combined, row.names = FALSE)
+  out_tbl <- knitr::kable(combined[,c('name', 'type', 'class', 'dim', 'size', 'created')], row.names = FALSE)
 
 
   # reset engine to R for code formatting, folding, etc. ----
@@ -95,13 +97,14 @@ get_dimn <- function(x) {
 #' @keywords internal
 get_size <- function(x) {
 
-  sz <- utils::object.size(x)
+  sz <- object.size(x)
+
   sz_fmt <-
-    if (sz < 1000) {format(sz, units = 'B', standard = 'SI')}
-    else if (sz < 1000^2) {format(sz, unit = 'kB', standard = 'SI')}
-    else if (sz < 1000^3) {format(sz, unit = 'MB', standard = 'SI')}
-    else if (sz < 1000^4) {format(sz, unit = 'GB', standard = 'SI')}
-    else {format(sz, units = 'TB', standard = 'SI')}
+         if (sz < 1000^1) {format(sz, units =  'B', standard = 'SI')}
+    else if (sz < 1000^2) {format(sz, units = 'kB', standard = 'SI')}
+    else if (sz < 1000^3) {format(sz, units = 'MB', standard = 'SI')}
+    else if (sz < 1000^4) {format(sz, units = 'GB', standard = 'SI')}
+    else                  {format(sz, units = 'TB', standard = 'SI')}
 
   return(sz_fmt)
 
