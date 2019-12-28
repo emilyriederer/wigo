@@ -56,6 +56,10 @@ eng_wigo <- function(options) {
   assign("knitr_wigo_eng_df", combined, envir = knitr::knit_global())
   out_tbl <- knitr::kable(combined, row.names = FALSE)
 
+
+  # reset engine to R for code formatting, folding, etc. ----
+  options$engine <- 'r'
+
   # return output ----
   knitr::engine_output(options, options$code, out_tbl)
 
