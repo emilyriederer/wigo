@@ -32,6 +32,6 @@ You can toggle the language engine of your RMarkdown document to `wigo` by addin
 
 ```
 library(wigo)
-set_eng_wigo()
+register_eng_wigo()
 knitr::opts_chunk$set(engine = 'wigo')
 ```

@@ -63,15 +63,15 @@ eng_wigo <- function(options) {
 
 #' Convenience function to expose wigo as a knitr engine
 #'
-#' This is a basic wrapper around `knitr::knit_engines$set` to expose `wigo`
+#' This is a basic wrapper around `knitr::knit_engines$set` to register `wigo`
 #' as a valid and callable language engine for knitting an RMarkdown
 #'
 #' @return No return
 #' @export
 #'
 #' @examples
-#' \dontrun{set_eng_wigo()}
-set_eng_wigo <- function() {
+#' \dontrun{register_eng_wigo()}
+register_eng_wigo <- function() {
 
   knitr::knit_engines$set(wigo = wigo::eng_wigo)
 

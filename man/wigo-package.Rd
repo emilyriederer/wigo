@@ -8,7 +8,7 @@
 \description{
 This knitr engine that outputs table representing state of
     knitr environment and key state changes. It is intended to help understand 
-    and debug an RMarkdown script
+    and debug an RMarkdown script.
 }
 \author{
 \strong{Maintainer}: Emily Riederer \email{emilyriederer@gmail.com}
