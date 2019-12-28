@@ -29,7 +29,7 @@ eng_wigo <- function(options) {
   }
 
   # capture current enviornments ----
-  obj_names <- setdiff(ls(envir = knitr::knit_global()), c("options", "eng_explain", "knitr_wigo_eng_df"))
+  obj_names <- setdiff(ls(envir = knitr::knit_global()), c("options", "eng_wigo", "knitr_wigo_eng_df"))
 
   # record outputs ----
   obj_types <- vapply(obj_names, FUN = function(x) typeof(get(x)), character(1))
@@ -56,8 +56,8 @@ eng_wigo <- function(options) {
 
   # preserve history and create output ----
   assign("knitr_wigo_eng_df", combined, envir = knitr::knit_global())
-  out_tbl <- knitr::kable(combined[,c('name', 'type', 'class', 'dim', 'size', 'created')], row.names = FALSE)
-
+  combined <- combined[,c('name', 'type', 'class', 'dim', 'size', 'created')]
+  out_tbl <- knitr::kable(combined, row.names = FALSE)
 
   # reset engine to R for code formatting, folding, etc. ----
   options$engine <- 'r'
