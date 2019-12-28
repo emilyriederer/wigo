@@ -23,7 +23,7 @@ eng_wigo <- function(options) {
 
   # evaluate code passed to chunk ----
   if (identical(options$eval, TRUE)) {
-    eval(parse(text = knitr:::one_string(options$code)),
+    eval(parse(text = paste(options$code, collapse = "\n")),
          envir = knitr::knit_global())
   }
 
