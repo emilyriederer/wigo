@@ -21,6 +21,7 @@ The engine can be called for all chunks by setting
 
 ```
 library(wigo)
+register_eng_wigo()
 ```
 
 at the top of your RMarkown, or by putting `engine = wigo` within the header

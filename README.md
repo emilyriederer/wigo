@@ -12,6 +12,7 @@ Specifically, instead of normal chunk output, `wigo` output a table explaining t
 - type
 - class
 - dimensions (rows x columns for dataframes and `length` otherwise)
+- object size
 - name of chunk in which variable was created
 
 A new row is added to this table either when a new object is added to the environment or when the dimensions of a current object change. Currently, the actual contents of objects are not inspected.
