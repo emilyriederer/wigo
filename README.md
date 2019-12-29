@@ -4,11 +4,11 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of `wigo` is to make it easier to understand how an RMarkdown is generating its output by toggling the knit engine. `wigo` will help you understand *w*hat *i*s *g*oing *o*n in an RMarkdown document by output a table explaining the knitting state and key changes. 
+The goal of `wigo` is to make it easier to understand how an RMarkdown is generating its output by toggling the knit engine. `wigo` will help you understand **w**hat **i**s **g**oing **o**n in an RMarkdown document by outputting tables under each chunk with information about the state of the environment. 
 
-Specifically, instead of normal chunk output, `wigo` output a table explaining the state containing columns for each object in the enviornment and describing its:
+Specifically, instead of normal chunk output, `wigo` outputs a table containing columns for each object in the enviornment and describing its:
 
-- status (created, modified, removed)
+- status (created, modified, unchanged, removed)
 - name
 - type
 - class
@@ -17,6 +17,8 @@ Specifically, instead of normal chunk output, `wigo` output a table explaining t
 - name of chunk in which variable was created or last modified
 
 A new row is added to this table either when a new object is added to the environment or when the dimensions of a current object change. Currently, the actual contents of objects are not inspected.
+
+`wigo` contains two flavors out this output. Setting `engine = 'wigo'` will result in a report of the complete environment after every chunk. Alternatively, `engine = 'wigo_diff'` will report only changes to the environement (e.g. not the 'unchanged' category).
 
 ## Installation
 
