@@ -58,7 +58,7 @@ to output like:
 
 or like this with the `wigo_diff` engine:
 
-1[](man/figures/readme-ex-output-diff.png)
+![](man/figures/readme-ex-output-diff.png)
 
 # Assumptions & Limitations
 
