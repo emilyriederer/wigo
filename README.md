@@ -56,8 +56,8 @@ to output like:
 
 ![](man/figures/readme-ex-output.png)
 
-# Limitations
+# Assumptions & Limitations
 
-`wigo` provides a high-level overview of changes to the environment but is not perfect. It detects and reports changes to an objects class, type, size, or dimensions, but it is not actually checking the contents of each objects. For example, in the image above, no changes are detected for `y` after we do the computation `y <- y+1` because this does not meaningfully change any of elements listed above although it clearly changes the value.
-
-Additionally, `wigo` currently works with HTML output. 
+- `wigo` assumes all chunks in your RMarkdown are currently R chunk, and it requires that you globally set the rendering engine to `wigo` instead. Currently, the underlying logic will not work particularly well for a single chunk
+- For a given variable name, `wigo` detects changes to to an object's class, type, size, or dimensions but not its underlying contents. For example, in the image above, no changes are detected for `y` after we do the computation `y <- y+1` because this does not meaningfully change any of elements listed above although it clearly changes the value
+- Additionally, `wigo` currently works exclusively for HTML output
