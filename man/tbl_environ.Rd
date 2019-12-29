@@ -4,7 +4,7 @@
 \alias{tbl_environ}
 \title{Create `data.frame` representation of current environment}
 \usage{
-tbl_environ(obj_names)
+tbl_environ(obj_names, environ = knitr::knit_global())
 }
 \description{
 Create `data.frame` representation of current environment

@@ -60,9 +60,20 @@ eng_wigo_diff <- function(options) {
   output <- output[,c('status','name', 'type', 'class', 'dim', 'size', 'created')]
   output <- output[order(output$status, output$name),]
 
+  # changes for color ----
+  if (nrow(output) > 0) {
+    colors <- rep('blue', length(output$status))
+    colors[output$status == 'created'] <- 'green'
+    colors[output$status == 'removed'] <- 'red'
+    output$status <- kableExtra::cell_spec(output$status, "html", color = colors)
+  }
+  options$results <- 'asis'
+
   # save output ----
   assign("knitr_wigo_eng_df", history, envir = knitr::knit_global())
-  out_tbl <- knitr::kable(output, row.names = FALSE, caption = paste('Chunk', options$label, 'Changelog'))
+  out_tbl <- knitr::kable(output, row.names = FALSE, caption = paste('Changes after Chunk', options$label),
+                          escape = F)
+  out_tbl <- kableExtra::kable_styling(out_tbl)
 
   # reset engine to R for code formatting, folding, etc. ----
   options$engine <- 'r'
