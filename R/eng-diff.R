@@ -26,8 +26,8 @@ eng_wigo_diff <- function(options) {
   }
 
   # capture current enviornments ----
-  obj_names <- setdiff(ls(envir = knitr::knit_global()), c("options", "knitr_wigo_eng_df"))
-  curr_env <- tbl_environ(obj_names, chunk_name = options$label)
+  curr_env <- tbl_environ(environ = knitr::knit_global(), chunk_name = options$label)
+
 
   # merge former and current environments ----
   prev_env <- tryCatch(get('knitr_wigo_eng_df', knitr::knit_global()), error = function(e) NULL)

@@ -44,8 +44,9 @@ get_size <- function(x) {
 
 #' Create `data.frame` representation of current environment
 #' @keywords internal
-tbl_environ <- function(obj_names, environ = knitr::knit_global(), chunk_name = options$label) {
+tbl_environ <- function(environ, chunk_name) {
 
+  obj_names <- setdiff(ls(envir = environ), c("options", "knitr_wigo_eng_df"))
   obj_types <- vapply(obj_names, FUN = function(x) typeof(get(x, envir = environ)), character(1))
   obj_class <- vapply(obj_names, FUN = function(x) class(get(x, envir = environ)), character(1))
   obj_dimns <- vapply(obj_names, FUN = function(x) get_dimn(get(x, envir = environ)), character(1))
