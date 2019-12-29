@@ -1,4 +1,21 @@
-# Internal helper function for engine
+#' Convenience function to expose wigo as a knitr engine
+#'
+#' This is a basic wrapper around `knitr::knit_engines$set` to register `wigo`
+#' as a valid and callable language engine for knitting an RMarkdown
+#'
+#' @return No return
+#' @export
+#'
+#' @examples
+#' \dontrun{register_eng_wigo()}
+register_eng_wigo <- function() {
+
+  knitr::knit_engines$set(wigo = wigo::eng_wigo,
+                          wigo_diff = wigo::eng_wigo_diff)
+
+}
+
+# Internal helper function for engine ----
 
 #' Provides `length` for all object types except `data.frame`s and `nrow x ncol` for `data.frame`
 #' @keywords internal
