@@ -8,12 +8,13 @@ The goal of `wigo` is to make it easier to understand how an RMarkdown is genera
 
 Specifically, instead of normal chunk output, `wigo` output a table explaining the state containing columns for each object in the enviornment and describing its:
 
+- status (created, modified, removed)
 - name
 - type
 - class
 - dimensions (rows x columns for dataframes and `length` otherwise)
 - object size
-- name of chunk in which variable was created
+- name of chunk in which variable was created or last modified
 
 A new row is added to this table either when a new object is added to the environment or when the dimensions of a current object change. Currently, the actual contents of objects are not inspected.
 
@@ -36,6 +37,16 @@ library(wigo)
 register_eng_wigo()
 knitr::opts_chunk$set(engine = 'wigo')
 ```
+
+to see a full description of the environment and any changes at each point in time, or
+
+```
+library(wigo)
+register_eng_wigo()
+knitr::opts_chunk$set(engine = 'wigo_diff')
+```
+
+to see only the environment diff. 
 
 By doing so, you can input such as:
 
