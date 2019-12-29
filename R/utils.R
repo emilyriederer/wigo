@@ -44,20 +44,19 @@ get_size <- function(x) {
 
 #' Create `data.frame` representation of current environment
 #' @keywords internal
-tbl_environ <- function(obj_names) {
+tbl_environ <- function(obj_names, environ = knitr::knit_global()) {
 
-  obj_types <- vapply(obj_names, FUN = function(x) typeof(get(x)), character(1))
-  obj_class <- vapply(obj_names, FUN = function(x) class(get(x)), character(1))
-  obj_dimns <- vapply(obj_names, FUN = function(x) get_dimn(get(x)), character(1))
-  obj_rawsz <- vapply(obj_names, FUN = function(x) object.size(get(x)), numeric(1))
-  obj_size  <- vapply(obj_names, FUN = function(x) get_size(get(x)), character(1))
+  obj_types <- vapply(obj_names, FUN = function(x) typeof(get(x, envir = environ)), character(1))
+  obj_class <- vapply(obj_names, FUN = function(x) class(get(x, envir = environ)), character(1))
+  obj_dimns <- vapply(obj_names, FUN = function(x) get_dimn(get(x, envir = environ)), character(1))
+  obj_rawsz <- vapply(obj_names, FUN = function(x) object.size(get(x, envir = environ)), numeric(1))
+  obj_size  <- vapply(obj_names, FUN = function(x) get_size(get(x, envir = environ)), character(1))
   out <- data.frame(name    = obj_names,
                     type    = obj_types,
                     class   = obj_class,
                     dim     = obj_dimns,
                     raw_sz  = obj_rawsz,
                     size    = obj_size,
-                    created = rep(options$label, times = length(obj_names)),
                     stringsAsFactors = FALSE,
                     row.names = NULL)
   return(out)
