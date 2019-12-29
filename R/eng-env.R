@@ -40,14 +40,15 @@ eng_wigo <- function(options) {
   # preserve history and create output ----
   assign("knitr_wigo_eng_df", combined, envir = knitr::knit_global())
   combined <- combined[,c('name', 'type', 'class', 'dim', 'size', 'created')]
-  out_tbl <- knitr::kable(combined, row.names = FALSE)
+  out_tbl <- fmt_tbl(combined, chunk_name = options$label)
 
-  # reset engine to R for code formatting, folding, etc. ----
-  options$engine <- 'r'
-
-  # return output ----
+  # reconfigure and return ----
+  options$engine <- 'r' # change lang eng for formatting, folding, etc.
+  options$results <- 'asis' # output results as-is for kableExtra formatting
   knitr::engine_output(options, options$code, out_tbl)
 
 }
+
+
 
 

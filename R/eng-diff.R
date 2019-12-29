@@ -67,18 +67,14 @@ eng_wigo_diff <- function(options) {
     colors[output$status == 'removed'] <- 'red'
     output$status <- kableExtra::cell_spec(output$status, "html", color = colors)
   }
-  options$results <- 'asis'
 
   # save output ----
   assign("knitr_wigo_eng_df", history, envir = knitr::knit_global())
-  out_tbl <- knitr::kable(output, row.names = FALSE, caption = paste('Changes after Chunk', options$label),
-                          escape = F)
-  out_tbl <- kableExtra::kable_styling(out_tbl)
+  out_tbl <- fmt_tbl(output, chunk_name = options$label)
 
-  # reset engine to R for code formatting, folding, etc. ----
-  options$engine <- 'r'
-
-  # return output ----
+  # reconfigure and return ----
+  options$engine <- 'r' # change lang eng for formatting, folding, etc.
+  options$results <- 'asis' # output results as-is for kableExtra formatting
   knitr::engine_output(options, options$code, out_tbl)
 
 }
