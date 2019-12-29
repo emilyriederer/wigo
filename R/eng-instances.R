@@ -11,8 +11,13 @@
 #' ```
 #' library(wigo)
 #' register_eng_wigo()
-#  knitr::opts_chunk$set(engine = 'wigo')
+#  knitr::opts_chunk$set(engine = 'wigo') # or 'wigo_diff'
 #' ```
+#'
+#' `wigo` and `wigo_diff` vary simply by which variables they chose to report.
+#' `wigo` reports on the state of all variables in the environment, whereas
+#' `wigo_diff` reports only on those that were changed (created, modified, or
+#' removed) in the preceding chunk.
 #'
 #' @param options Chunk options provided by `knitr`
 #'
@@ -45,3 +50,7 @@
 #
 # }
 eng_wigo <- function(options) {eng_wigo_base(options, diff = FALSE)}
+
+#' @rdname eng_wigo
+#' @export
+eng_wigo_diff <- function(options) {eng_wigo_base(options, diff = TRUE)}
