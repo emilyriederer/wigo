@@ -56,6 +56,10 @@ to output like:
 
 ![](man/figures/readme-ex-output.png)
 
+or like this with the `wigo_diff` engine:
+
+1[](man/figures/readme-ex-output-diff.png)
+
 # Assumptions & Limitations
 
 - `wigo` assumes all chunks in your RMarkdown are currently R chunk, and it requires that you globally set the rendering engine to `wigo` instead. Currently, the underlying logic will not work particularly well for a single chunk
