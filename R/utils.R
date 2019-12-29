@@ -70,8 +70,9 @@ tbl_environ <- function(environ, chunk_name) {
 fmt_tbl <- function(df, chunk_name) {
 
   out <- knitr::kable(df,
+                      format = 'html',
                       row.names = FALSE,
-                      caption = paste('Changes after Chunk', chunk_name),
+                      caption = paste('Chunk', chunk_name),
                       escape = FALSE)
   out <- kableExtra::kable_styling(out)
   return(out)
